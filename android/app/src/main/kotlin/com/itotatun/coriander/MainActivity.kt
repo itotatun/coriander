@@ -1,0 +1,6 @@
+package com.itotatun.coriander
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
