@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'main_model.dart';
 import 'next_page.dart';
 
 void main() {
@@ -8,17 +10,41 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+      home: ChangeNotifierProvider<MainModel>(
+        create: (_) => MainModel(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('コリアンダー'),
+          ),
+        body: Consumer<MainModel>(
+          builder: (context, model, child) {
+            return Center(
+              child: Column(
+               children: [
+                Text(
+                  model.kboyText,
+                  style: TextStyle(
+                   fontSize: 30,
+              ),
+            ),
+            RaisedButton(
+              child: Text('ボタン'),
+                onPressed: () {
+                   model.changeKboyText();
+                  },
+                ),
+               ],
+              ),
+            );
+          },
+        ),
+       ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
